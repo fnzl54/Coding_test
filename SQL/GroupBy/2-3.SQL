@@ -1,0 +1,12 @@
+-- 코드를 입력하세요
+-- https://school.programmers.co.kr/learn/courses/30/lessons/131123
+SELECT R1.FOOD_TYPE, R1.REST_ID, R1.REST_NAME, R1.FAVORITES
+FROM REST_INFO R1
+JOIN    (
+            SELECT FOOD_TYPE, MAX(FAVORITES) as FAVORITES
+            FROM REST_INFO
+            GROUP BY FOOD_TYPE
+        ) R2
+ON  R1.FOOD_TYPE = R2.FOOD_TYPE
+    and R1.FAVORITES = R2.FAVORITES
+ORDER BY R1.FOOD_TYPE DESC
