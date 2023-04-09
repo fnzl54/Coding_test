@@ -1,3 +1,5 @@
+package level_1;
+
 public class 자릿수더하기 {
     public static void main(String[] args) {
         int n = 123;

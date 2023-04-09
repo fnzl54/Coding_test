@@ -1,3 +1,5 @@
+package level_1;
+
 class 최소직사각형 {
     public int solution(int[][] sizes) {
 

@@ -1,3 +1,5 @@
+package level_1;
+
 public class 나머지가1이되는수 {
     public static void main(String[] args) {
         int n = 10;

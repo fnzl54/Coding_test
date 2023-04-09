@@ -1,3 +1,5 @@
+package level_1;
+
 import java.util.*;
 
 public class x민큼간격이있는n개의숫자 {

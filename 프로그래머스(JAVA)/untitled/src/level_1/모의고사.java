@@ -1,3 +1,5 @@
+package level_1;
+
 import java.util.ArrayList;
 
 public class 모의고사 {
