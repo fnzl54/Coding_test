@@ -11,7 +11,6 @@ public class 사전문제2 {
     int T = sc.nextInt();
     int N = 0, M = 0, Q = 0;
     int r = 0, c = 0, x = 0;
-    List<int[]> before = new ArrayList<>();
 
     for (int t = 1; t <= T; t++) {
 
@@ -20,107 +19,49 @@ public class 사전문제2 {
       Q = sc.nextInt();
 
       int[][] origin = new int[N][M];
+      int[] max_row = new int[N];
+      int[] max_col = new int[M];
       int answer = 0;
 
       for (int i = 0; i < N; i++) {
         for (int j = 0; j < M; j++) {
           origin[i][j] = sc.nextInt();
+
+          // 행의 최대 개체 수 업데이트
+          max_row[i] = Math.max(max_row[i], origin[i][j]);
+
+          // 열의 최대 개체 수 업데이트
+          max_col[j] = Math.max(max_col[j], origin[i][j]);
         }
       }
 
-      //초기 찾기
-      for (int row = 0; row < N; row++) {
-        int row_max = Arrays.stream(origin[row]).max().getAsInt();
-
-        List<Integer> rowList = new ArrayList<>();
-        for (int element : origin[row]) {
-          rowList.add(element);
-        }
-
-        int row_location = rowList.indexOf(row_max);
-
-        int col_max = 0;
-        int col_location = 0;
-        for (int col = 0; col < N; col++) {
-          if (col_max < origin[col][row_location]) {
-            col_max = origin[col][row_location];
-            col_location = col;
-          }
-        }
-
-        if (row_max == col_max) {
-          int[] temp = {col_location, row_location};
-          before.add(temp);
-        }
-
-      }
-
-      // -> 이후에 변경점만 찾는데 만일 같은 행과 열이 아니면 기존거 저장했다가 착지
-      for (int i = 0; i < Q; i++) {
-        int max  = 0;
-
-        r = sc.nextInt() - 1;
-        c = sc.nextInt() - 1;
-        x = sc.nextInt();
+      for (int k = 0; k < Q; k++) {
+        r = sc.nextInt() - 1; // 관측 보고서 위치의 행
+        c = sc.nextInt() - 1; // 관측 보고서 위치의 열
+        x = sc.nextInt(); // 새로운 외계 곰팡이 개체 수
 
         origin[r][c] = x;
 
-        int before_size = before.size();
-        for (int j = 0; j < before_size; j++) {
-          if ( before.get(j)[0] == r || before.get(j)[1] == c) {
-            int row_max = Arrays.stream(origin[r]).max().getAsInt();
+        max_row[r] = Math.max(max_row[r], x);
+        max_col[c] = Math.max(max_col[c], x);
 
-            List<Integer> rowList = new ArrayList<>();
-            for (int element : origin[r]) {
-              rowList.add(element);
-            }
-
-            int row_location = rowList.indexOf(row_max);
-
-            int col_max = 0;
-            int col_location = 0;
-            for (int col = 0; col < N; col++) {
-              if (col_max < origin[col][row_location]) {
-                col_max = origin[col][row_location];
-                col_location = col;
+        for (int a = 0; a < N; a++) {
+          for (int b = 0; b < M; b++) {
+            if (max_row[a] == max_col[b]) {
+              if (origin[a][b] == max_row[a]) {
+                answer++;
+                break;
+              } else {
+                break;
               }
-            }
-
-            if (row_max == col_max) {
-              int[] temp = {col_location, row_location};
-              before.add(temp);
-              before.remove(j);
-            }
-
-          } else {
-            int row_max = Arrays.stream(origin[r]).max().getAsInt();
-
-            List<Integer> rowList = new ArrayList<>();
-            for (int element : origin[r]) {
-              rowList.add(element);
-            }
-
-            int row_location = rowList.indexOf(row_max);
-
-            int col_max = 0;
-            int col_location = 0;
-            for (int col = 0; col < N; col++) {
-              if (col_max < origin[col][row_location]) {
-                col_max = origin[col][row_location];
-                col_location = col;
-              }
-            }
-
-            if (row_max == col_max) {
-              int[] temp = {col_location, row_location};
-              before.add(temp);
             }
           }
-
         }
-        answer += before.size();
       }
+
       System.out.println("#" + t + " " + answer);
     }
   }
 }
+
+// Solution
