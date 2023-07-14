@@ -2,29 +2,42 @@ package 자바알고리즘문제풀이.섹션3;
 
 import java.util.*;
 
+import java.util.*;
+
 public class p4 {
-    public static void main(String[] args) {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
 
-        int[] prices =  {10,7,8,5,8,7,6,2,9};
-        int k =  3;
-        int answer = -1;
+        int n = sc.nextInt();
+        int a = sc.nextInt();
+        int answer = 0;
 
-        for (int i = 0; i < prices.length - k; i++) {
-            int[] temp = Arrays.copyOfRange(prices, i+1, prices.length);
-            Arrays.sort(temp);
-            if (prices[i] > temp[temp.length - 1]) {
-                continue;
+        int[] li = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            li[i] = sc.nextInt();
+        }
+
+        int f = 0, e = 1;
+
+        while (e < n) {
+            int temp = 0;
+
+            for (int i = f; i <= e; i++) {
+                temp += li[i];
+            }
+
+            if (temp == a) {
+                answer++;
+                e++;
+            } else if (temp < a) {
+                e++;
             } else {
-                int tempNum = - prices[i]*k;
-                for (int j = 1; j <= k; j++) {
-                    tempNum += temp[temp.length - j];
-                }
-                if (answer < tempNum) {
-                    answer = tempNum;
-                }
+                f++;
             }
         }
 
         System.out.println(answer);
+
     }
 }
