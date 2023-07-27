@@ -24,13 +24,13 @@ public class p3 {
 
     while (right != N) {
       int temp = 0;
-      for (int c : map.keySet()) {
-        if (map.get(c) != 0) {
-          temp++;
-        }
+      answer.add(map.size());
+
+      if (map.get(li[left]) - 1 == 0) {
+        map.remove(li[left]);
+      } else {
+        map.put(li[left], map.get(li[left]) - 1);
       }
-      answer.add(temp);
-      map.put(li[left], map.get(li[left]) - 1);
       map.put(li[right], map.getOrDefault(li[right], 0) + 1);
       left++;
       right++;
@@ -44,7 +44,9 @@ public class p3 {
     }
     answer.add(temp);
 
-    System.out.print(answer);
+    for (int i : answer) {
+      System.out.print(i + " ");
+    }
 
   }
 }
