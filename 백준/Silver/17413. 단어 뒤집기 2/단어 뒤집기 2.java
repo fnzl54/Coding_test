@@ -6,6 +6,7 @@ public class Main {
 
     String S = sc.nextLine();
     Stack<Character> st = new Stack<>();
+    StringBuilder sb = new StringBuilder();
 
     for (char c : S.toCharArray()) {
       if (c == ' ') {
@@ -14,15 +15,18 @@ public class Main {
         } else {
           int st_size = st.size();
           for (int i = 0; i < st_size; i++) {
-            System.out.print(st.pop());
+            sb.append(st.pop());
+            //System.out.print(st.pop());
           }
-          System.out.print(' ');
+          sb.append(' ');
+          //System.out.print(' ');
         }
       } else if (c == '<') {
         if (!st.isEmpty()) {
           int st_size = st.size();
           for (int i = 0; i < st_size; i++) {
-            System.out.print(st.pop());
+            sb.append(st.pop());
+            //System.out.print(st.pop());
           }
           st.add(c);
         } else {
@@ -31,7 +35,8 @@ public class Main {
       } else if (c == '>') {
         st.add(c);
         for (int i = 0; i < st.size(); i++) {
-          System.out.print(st.get(i));
+          sb.append(st.get(i));
+          //System.out.print(st.get(i));
         }
         st.clear();
       } else {
@@ -42,11 +47,11 @@ public class Main {
     if (!st.isEmpty()) {
       int st_size = st.size();
       for (int i = 0; i < st_size; i++) {
-        System.out.print(st.pop());
+        sb.append(st.pop());
+        //System.out.print(st.pop());
       }
     }
 
+    System.out.print(sb);
   }
 }
-
-
