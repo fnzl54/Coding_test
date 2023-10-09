@@ -22,7 +22,7 @@ public class Main {
     }
 
     Arrays.sort(tree);
-    top = tree[N-1];
+    top = tree[N-1] + 1;
 
     while (down < top) {
       int middle = (down + top) / 2;
