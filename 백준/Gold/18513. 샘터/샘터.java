@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-  public static int N, K, pointModifyNumber = 200000000, house = 0;
+  public static int N, K, pointModifyNumber = 100100000, house = 0;
   public static long answer = 0;
   public static boolean[] map;
   public static Queue<int[]> q = new LinkedList<>();
